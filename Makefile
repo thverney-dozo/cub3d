@@ -1,6 +1,9 @@
 CFLAGS = -Wall -Werror -Wextra
 NAME = Cub3D
 
+HEADERS = -I include -I gnl -I libft
+
+SRC_PATH = srcs/
 SRC_FILE = cub3d.c \
 parsing.c \
 distance.c \
@@ -18,6 +21,7 @@ ft_free.c \
 ft_utils_2.c \
 display_sprite_2.c \
 
+GNL_PATH = gnl/
 GNL_FILE = get_next_line.c get_next_line_utils.c
 
 LIB_PATH = libft/
@@ -35,20 +39,35 @@ ft_isdigit.c \
 ft_strlen.c \
 ft_sjoin_free.c \
 
-GNL_PATH = gnl/
-INC= cub3d.h
-SRC = ${SRC_FILE} ${addprefix ${GNL_PATH}, $(GNL_FILE)} ${addprefix ${LIB_PATH}, $(LIB_FILE)}
+INC= srcs/cub3d.h
+SRC = ${addprefix ${SRC_PATH}, $(SRC_FILE)} ${addprefix ${GNL_PATH}, $(GNL_FILE)} ${addprefix ${LIB_PATH}, $(LIB_FILE)}
 OBJS = ${SRC:%.c=%.o}
 FRAMEWORK = -framework OpenGL -framework AppKit
 
 all: ${NAME}
 
 $(NAME): ${OBJS} ${INC}
-	@gcc ${CFLAGS} -I include -g3 -l mlx ${FRAMEWORK} ${OBJS} -o ${NAME}
+	@gcc ${CFLAGS} ${HEADERS} -g3 -l mlx ${FRAMEWORK} ${OBJS} -o ${NAME}
+	@echo 
+	@echo "\n\033[03m			A raycasting shooter Wolfenstein-type\033[00m\033[0;32m"
+	@echo "──────────────────────────────────────────────────────────────────────────────"
+	@echo "─██████████████─██████──██████─██████████████───██████████████─████████████───"
+	@echo "─██░░░░░░░░░░██─██░░██──██░░██─██░░░░░░░░░░██───██░░░░░░░░░░██─██░░░░░░░░████─"
+	@echo "─██░░██████████─██░░██──██░░██─██░░██████░░██───██████████░░██─██░░████░░░░██─"
+	@echo "─██░░██─────────██░░██──██░░██─██░░██──██░░██───────────██░░██─██░░██──██░░██─"
+	@echo "─██░░██─────────██░░██──██░░██─██░░██████░░████─██████████░░██─██░░██──██░░██─"
+	@echo "─██░░██─────────██░░██──██░░██─██░░░░░░░░░░░░██─██░░░░░░░░░░██─██░░██──██░░██─"
+	@echo "─██░░██─────────██░░██──██░░██─██░░████████░░██─██████████░░██─██░░██──██░░██─"
+	@echo "─██░░██─────────██░░██──██░░██─██░░██────██░░██─────────██░░██─██░░██──██░░██─"
+	@echo "─██░░██████████─██░░██████░░██─██░░████████░░██─██████████░░██─██░░████░░░░██─"
+	@echo "─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░████─"
+	@echo "─██████████████─██████████████─████████████████─██████████████─████████████───"
+	@echo "──────────────────────────────────────────────────────────────────────────────\033[00m"
+	@echo "                                \033[03mHas been created!\n\033[00m"
 
 %.o : %.c
-	@echo Compiling $<
-	@gcc $(CFLAGS) -c -I include/ $< -o $@
+	@/bin/echo -n [+]
+	@gcc $(CFLAGS) -c ${HEADERS} $< -o $@
 
 clean:
 	@rm -f ${OBJS} ${BONUS}
@@ -59,3 +78,4 @@ fclean: clean
 bonus :
 
 re: clean all
+
