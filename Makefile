@@ -73,7 +73,7 @@ clean:
 	@rm -f ${OBJS} ${BONUS}
 
 fclean: clean
-	@rm ${NAME}
+	@rm -f ${NAME}
 
 bonus :
 
